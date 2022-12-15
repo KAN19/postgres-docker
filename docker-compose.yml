@@ -1,13 +1,17 @@
-version: '3.2'
+version: '3.8'
 services:
   db:
-    image: "postgres:14.5"
-    ports:
-      - "5432:5432"
+    image: 'postgres:14.5'
+    container_name: 'dochero-db'
+    restart: always
     environment:
       - POSTGRES_USER=postgres
-      - POSTGRES_DB=department-db
+      - POSTGRES_DB=dochero-db
       - POSTGRES_PASSWORD=password
-      - POSTGRES_HOST_AUTH_METHOD=trust
-      - TZ=UTC
-      - PGTZ=UTC
+    ports:
+      - '5432:5432'
+    volumes: 
+      - db:/var/lib/postgresql/data
+volumes:
+  db:
+    driver: local
